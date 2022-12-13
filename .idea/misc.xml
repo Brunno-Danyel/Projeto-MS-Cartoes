@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/gatewayMS/pom.xml" />
         <option value="$PROJECT_DIR$/cloudGatewayMS/pom.xml" />
         <option value="$PROJECT_DIR$/mscloudgateway/pom.xml" />
+        <option value="$PROJECT_DIR$/mscartoes/pom.xml" />
       </list>
     </option>
   </component>
