@@ -11,6 +11,7 @@
         <module name="mscartoes" />
         <module name="mscloudgateway" />
         <module name="eurekaServer" />
+        <module name="msavaliadorCredito" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -23,6 +24,7 @@
       <module name="clienteMS" options="-parameters" />
       <module name="eurekaServer" options="-parameters" />
       <module name="gatewayMS" options="-parameters" />
+      <module name="msavaliadorCredito" options="-parameters" />
       <module name="mscartoes" options="-parameters" />
       <module name="mscloudgateway" options="-parameters" />
     </option>
