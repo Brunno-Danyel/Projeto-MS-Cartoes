@@ -18,7 +18,7 @@ public class CartoesPorClienteResponse {
 
     public static CartoesPorClienteResponse fromDto(ClienteCartao dto) {
         return new CartoesPorClienteResponse(dto.getCartao().getNome(),
-                dto.getCartao().getBandeiraCartao().toString(),
+                dto.getCartao().getBandeira().toString(),
                 dto.getLimite());
     }
 }

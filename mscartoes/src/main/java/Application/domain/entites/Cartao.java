@@ -1,7 +1,6 @@
 package Application.domain.entites;
 
 import Application.domain.enumeration.BandeiraCartao;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,16 +19,16 @@ public class Cartao {
     private String nome;
 
     @Enumerated(EnumType.STRING)
-    private BandeiraCartao bandeiraCartao;
+    private BandeiraCartao bandeira;
 
     private BigDecimal renda;
 
-    private BigDecimal limite;
+    private BigDecimal limiteBasico;
 
     public Cartao(String nome, BandeiraCartao bandeiraCartao, BigDecimal renda, BigDecimal limite) {
         this.nome = nome;
-        this.bandeiraCartao = bandeiraCartao;
+        this.bandeira = bandeiraCartao;
         this.renda = renda;
-        this.limite = limite;
+        this.limiteBasico = limite;
     }
 }

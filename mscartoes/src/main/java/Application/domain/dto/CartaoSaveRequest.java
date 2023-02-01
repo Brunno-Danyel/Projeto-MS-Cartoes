@@ -12,10 +12,10 @@ public class CartaoSaveRequest {
     private String nome;
     private BandeiraCartao bandeira;
     private BigDecimal renda;
-    private BigDecimal limite;
+    private BigDecimal limiteBasico;
 
 
     public Cartao fromDTO(){
-        return new Cartao(nome, bandeira, renda, limite);
+        return new Cartao(nome, bandeira, renda, limiteBasico);
     }
 }
