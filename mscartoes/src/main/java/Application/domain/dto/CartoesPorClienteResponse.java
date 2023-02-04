@@ -16,6 +16,7 @@ public class CartoesPorClienteResponse {
     private String bandeira;
     private BigDecimal limiteLiberado;
 
+
     public static CartoesPorClienteResponse fromDto(ClienteCartao dto) {
         return new CartoesPorClienteResponse(dto.getCartao().getNome(),
                 dto.getCartao().getBandeira().toString(),
