@@ -2,8 +2,10 @@ package application.domain.service;
 
 import application.domain.exception.DadosClienteNotFoundException;
 import application.domain.exception.ErroComunicacaoMSexception;
+import application.domain.exception.ErroSolicitacaoCartaoException;
 import application.domain.infra.CartoesResourceClient;
 import application.domain.infra.ClienteResourceClient;
+import application.domain.infra.mqueue.SolicitacaoEmissaoCartaoPublisher;
 import application.domain.model.*;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +26,9 @@ public class AvaliadorCreditoService {
 
     @Autowired
     private CartoesResourceClient cartoesClient;
+
+    @Autowired
+    private SolicitacaoEmissaoCartaoPublisher solicitacaoEmissaoCartaoPublisher;
 
     public SituacaoCliente obterSituacaoCliente(String cpf) throws DadosClienteNotFoundException, ErroComunicacaoMSexception {
         try {
@@ -76,6 +82,16 @@ public class AvaliadorCreditoService {
                 throw new DadosClienteNotFoundException();
             }
             throw new ErroComunicacaoMSexception(ex.getMessage(), status);
+        }
+    }
+
+    public ProtocoloSolicitarCartao solicitarEmissaoCartao(DadosSolicitacaoEmissaoCartao dadosSolicitacaoEmissaoCartao) {
+        try {
+            solicitacaoEmissaoCartaoPublisher.solicitarCartao(dadosSolicitacaoEmissaoCartao);
+            var protocolo = UUID.randomUUID().toString();
+            return new ProtocoloSolicitarCartao(protocolo);
+        } catch (Exception e) {
+            throw new ErroSolicitacaoCartaoException(e.getMessage());
         }
     }
 }

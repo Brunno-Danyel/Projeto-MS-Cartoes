@@ -2,9 +2,8 @@ package application.domain.controller;
 
 import application.domain.exception.DadosClienteNotFoundException;
 import application.domain.exception.ErroComunicacaoMSexception;
-import application.domain.model.DadosAvaliacao;
-import application.domain.model.RetornoAvaliacaoCliente;
-import application.domain.model.SituacaoCliente;
+import application.domain.exception.ErroSolicitacaoCartaoException;
+import application.domain.model.*;
 import application.domain.service.AvaliadorCreditoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +47,18 @@ public class AvaliadorCreditoController {
             return ResponseEntity.status(HttpStatus.resolve(e.getStatus())).body(e.getMessage());
         }
 
+    }
+
+    @PostMapping("solicitacoes-cartao")
+    public ResponseEntity solicitarCartao(@RequestBody DadosSolicitacaoEmissaoCartao dadosSolicitacaoEmissaoCartao) {
+        try {
+            ProtocoloSolicitarCartao protocoloSolicitarCartao = avaliadorCreditoService
+                    .solicitarEmissaoCartao(dadosSolicitacaoEmissaoCartao);
+            return ResponseEntity.ok(protocoloSolicitarCartao);
+
+        } catch (ErroSolicitacaoCartaoException e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
 
 
