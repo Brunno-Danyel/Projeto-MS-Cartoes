@@ -3,10 +3,10 @@ spring:
     name: eurekaServer
   security:
     basic:
-      enable: true
+      enabled: true
     user:
-      name: mseureka
-      password: keseramu
+      name: brunno-user
+      password: 123456789
 
 server:
   port: 8761
@@ -15,5 +15,3 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
-  instance:
-    prefer-ip-address: true
