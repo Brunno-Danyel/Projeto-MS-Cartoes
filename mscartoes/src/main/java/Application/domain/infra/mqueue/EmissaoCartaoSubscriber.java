@@ -5,15 +5,15 @@ import Application.domain.entites.ClienteCartao;
 import Application.domain.entites.DadosSolicitacaoEmissaoCartao;
 import Application.domain.repository.CartaoRepository;
 import Application.domain.repository.ClienteCartaoRepository;
-import ch.qos.logback.core.net.server.Client;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class EmissaoCartaoSubscriber {
 
     @Autowired
@@ -38,8 +38,8 @@ public class EmissaoCartaoSubscriber {
 
             clienteCartaoRepository.save(clienteCartao);
 
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("Erro ao receber solicitação de emissão de cartão: {}", e.getMessage());
         }
     }
 }
