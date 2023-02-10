@@ -1,5 +1,11 @@
+FROM maven:3-openjdk-17 as build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
+
 FROM openjdk:17
 WORKDIR /app
-COPY ./target/eurekaServer-1.0-SNAPSHOT.jar eurekaServerApp.jar
+COPY --from=build ./app/target/*.jar ./app.jar
 EXPOSE 8761
-ENTRYPOINT java -jar eurekaServerApp.jar
+ENTRYPOINT java -jar app.jar
