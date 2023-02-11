@@ -1,11 +1,6 @@
 spring:
   application:
-    name: msavaliadorcredito
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    name: msclientes
 
 server:
   port: 0
@@ -13,13 +8,9 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://brunno-user:123456789@localhost:8761/eureka
+      defaultZone: http://brunno-user:123456789@eureka-server:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-
-mq:
-  queue:
-    emissao-cartoes: emissao-cartoes
 
 management:
   endpoints:
